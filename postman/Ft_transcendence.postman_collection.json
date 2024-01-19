@@ -1,0 +1,518 @@
+{
+	"info": {
+		"_postman_id": "7b5df780-f57d-4b72-9d99-6e8bed8a7016",
+		"name": "Ft_transcendence",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12472532"
+	},
+	"item": [
+		{
+			"name": "Authentification",
+			"item": [
+				{
+					"name": "OAuth",
+					"item": [
+						{
+							"name": "42",
+							"item": [
+								{
+									"name": "Get authorization url",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{URL}}/42/oauth",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"42",
+												"oauth"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Hello World!",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/hello",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const { accessToken, refreshToken } = pm.response.json()",
+									"",
+									"// Update collection variables with the return of login route",
+									"if (accessToken && refreshToken) {",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", accessToken);",
+									"    pm.collectionVariables.set(\"REFRESH_TOKEN\", refreshToken);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "{{TEST_EMAIL}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{TEST_PASSWORD}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{TEST_USERNAME}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/auth/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const { accessToken, refreshToken, userId } = pm.response.json()",
+									"",
+									"// Update collection variables with the return of login route",
+									"if (accessToken && refreshToken) {",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", accessToken);",
+									"    pm.collectionVariables.set(\"REFRESH_TOKEN\", refreshToken);",
+									"}",
+									"",
+									"if (userId) {",
+									"    pm.collectionVariables.set(\"USER_ID\", userId)",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "{{TEST_EMAIL}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{TEST_PASSWORD}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "atinseau",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/auth/signin",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2fa callback",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const { accessToken, refreshToken } = pm.response.json()",
+									"",
+									"// Update collection variables with the return of login route",
+									"if (accessToken && refreshToken) {",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", accessToken);",
+									"    pm.collectionVariables.set(\"REFRESH_TOKEN\", refreshToken);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "{{USER_ID}}",
+									"type": "text"
+								},
+								{
+									"key": "secretCode",
+									"value": "5d3898",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "atinseau",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/auth/2fa/callback",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"2fa",
+								"callback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{URL}}/auth/signout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const { accessToken, refreshToken } = pm.response.json()",
+									"",
+									"// Update collection variables with the return of login route",
+									"if (accessToken && refreshToken) {",
+									"    pm.collectionVariables.set(\"ACCESS_TOKEN\", accessToken);",
+									"    pm.collectionVariables.set(\"REFRESH_TOKEN\", refreshToken);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refreshToken",
+									"value": "{{REFRESH_TOKEN}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/auth/refresh",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Profil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/user/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Setup 2fa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/user/2fa",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"2fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FortyTwo User",
+			"item": [
+				{
+					"name": "me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{URL}}/42/me?oauthToken=78989932e61a5d56fb7ae085984dbbc105024618a2a0ae250e0b1d47228f0637",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"42",
+								"me"
+							],
+							"query": [
+								{
+									"key": "oauthToken",
+									"value": "78989932e61a5d56fb7ae085984dbbc105024618a2a0ae250e0b1d47228f0637"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PORT",
+			"value": "8081",
+			"type": "string"
+		},
+		{
+			"key": "HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "http://{{HOST}}:{{PORT}}",
+			"type": "string"
+		},
+		{
+			"key": "ACCESS_TOKEN",
+			"value": "access_token"
+		},
+		{
+			"key": "REFRESH_TOKEN",
+			"value": "refresh_token"
+		},
+		{
+			"key": "USER_ID",
+			"value": "automatic variable"
+		},
+		{
+			"key": "TEST_EMAIL",
+			"value": "zewoboquebou-7072@yopmail.com"
+		},
+		{
+			"key": "TEST_PASSWORD",
+			"value": "password00..Ab"
+		},
+		{
+			"key": "TEST_USERNAME",
+			"value": "atinseau2"
+		}
+	]
+}

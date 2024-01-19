@@ -1,0 +1,51 @@
+{
+  "name": "@ft/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "PORT=${FRONTEND_PORT:-3000} next dev",
+    "start": "PORT=${FRONTEND_PORT:-3000} next start",
+    "build": "next build",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.1",
+    "@mui/material": "^5.14.2",
+    "bufferutil": "^4.0.7",
+    "cookies-next": "^2.1.2",
+    "next": "13.4.12",
+    "notistack": "^3.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-icons": "^4.10.1",
+    "socket.io-client": "^4.7.2",
+    "utf-8-validate": "^6.0.3",
+    "zustand": "^4.4.1",
+    "babylonjs": "^6.15.0",
+    "@babylonjs/gui": "^6.15.0",
+    "@babylonjs/inspector": "^6.14.0",
+    "@babylonjs/loaders": "^6.14.0",
+    "@babylonjs/materials": "6.15.0",
+    "cannon": "^0.6.2",
+    "earcut": "^2.2.4",
+    "clsx": "^1.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/node": "20.4.4",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.14",
+    "postcss": "8.4.27",
+    "sass": "^1.64.1",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.1.6",
+    "@babylonjs/core": "^6.14.0"
+  }
+}

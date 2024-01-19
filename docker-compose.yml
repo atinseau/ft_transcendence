@@ -1,0 +1,89 @@
+version: '3.8'
+
+volumes:
+  pnpm_store:
+  postgres_data:
+  avatar: 
+
+networks:
+  backend:
+  database:
+
+services:
+  base-image:
+    image: ft_transcendance_base
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./docker/base.Dockerfile
+    deploy:
+      mode: replicated
+      replicas: 0
+  postgres:
+    image: postgres
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${DATABASE_URL}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - database
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+      - ADMINER_DESIGN=hydra
+    networks:
+      - database
+    depends_on:
+      - postgres
+    ports:
+      - 9000:8080
+  frontend:
+    image: ft_transcendance_frontend
+    depends_on:
+      - base-image
+      - backend
+    networks:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - NEXT_PUBLIC_CLIENT_BACKEND_URL=${NEXT_PUBLIC_CLIENT_BACKEND_URL}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - ENVIRONMENT=production
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    volumes:
+      - pnpm_store:/root/.pnpm-store
+    build: 
+      context: ./
+      dockerfile: ./docker/next/Dockerfile
+  backend:
+    image: ft_transcendance_backend
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}
+      - ENVIRONMENT=production
+    depends_on:
+      - base-image
+      - postgres
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    networks:
+      - backend
+      - database
+    volumes:
+      - pnpm_store:/root/.pnpm-store
+      - avatar:/public
+    build: 
+      context: .
+      dockerfile: ./docker/nest/Dockerfile

@@ -1,0 +1,13 @@
+volumes:
+  postgres_data_dev:
+
+services:
+  postgres:
+    env_file:
+      - .env.development
+    ports:
+      - 5432:5432
+    environment:
+      - PGDATA=/home/postgres/pgdata
+    volumes:
+      - postgres_data_dev:/home/postgres/pgdata

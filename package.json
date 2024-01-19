@@ -1,0 +1,19 @@
+{
+  "name": "ft_transcendance",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "bash scripts/dev.sh",
+    "start": "dotenv -e .env.development turbo run start",
+    "build": "dotenv -e .env.development bash ./scripts/build.sh",
+    "clean": "bash scripts/clean.sh",
+    "up": "docker-compose up --build",
+    "prisma:dev": "pnpm --filter @ft/backend prisma:dev",
+    "prisma": "pnpm --filter @ft/backend prisma"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.10.12",
+    "dotenv-cli": "^7.3.0",
+    "turbo": "latest"
+  }
+}
